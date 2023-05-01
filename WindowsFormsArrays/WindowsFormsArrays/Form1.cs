@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +17,32 @@ namespace WindowsFormsArrays
     {
         TextBox tb;
         Button btn = new Button();
-        int s = 0;
-        int l = 0;
-        int i = 1;
+        int top = 0;
+        int left = 0;
+        int sum = 0;
+        int i;
+
+        public void addBox(int i) {
+            tb = new TextBox();
+            left = i / 6;
+            top = i % 6;
+            tb.Location = new Point(left * 60, top * 25);
+            tb.Size = new Size(50, 20);
+            //tb.Text = "val" + i;
+            tb.Name = "val" + i;
+            panel1.Controls.Add(tb);
+            label2.Text = left.ToString();
+        }
+        public void addButton(int i) { 
+            left = i / 6;
+            top = i % 6;
+            btn.Location = new Point(left * 60, top * 25);
+            btn.Size = new Size(50, 20);
+            btn.Text = "Somme";
+            btn.Name = "btn" + i;
+            btn.Click += new System.EventHandler(btnSomme_Click);
+            panel1.Controls.Add(btn);
+        }
         public Form1()
         {
             InitializeComponent();
@@ -27,36 +50,17 @@ namespace WindowsFormsArrays
 
         private void button1_Click(object sender, EventArgs e)
         {
-            s = 0;
-            l = 0;
-            if (Convert.ToInt32(numBoxes.Text) % 1 == 0)
-            {
-                for (i = 1; i < Convert.ToInt32(numBoxes.Text) + 1; i++)
+    
+                for (i = 0; i < Convert.ToInt32(numBoxes.Text); i++)
                 {
-                    tb = new TextBox();
-                    if (l == 6) { l = 0; s += 60; }
-                    tb.Location = new Point(s, l * 25);
-                    tb.Size = new Size(50, 20);
-                    //tb.Text = "val" + i;
-                    tb.Name = "val" + i;
-                    panel1.Controls.Add(tb);
-                    l++;
+                    addBox(i);
                 }
 
-                if (l == 6) { l = 0; s += 60; }
-                btn.Location = new Point(s, l * 25);
-                btn.Size = new Size(50, 20);
-                btn.Text = "Somme";
-                btn.Name = "btn" + i;
-                btn.Click += new System.EventHandler(btnSomme_Click);
-                panel1.Controls.Add(btn);
-            }
-
+            addButton(i);
         }
 
         private void btnSomme_Click(object sender, EventArgs e)
         {
-            int sum = 0;
             
             for (int j = 1; j < i; j++)
             {
@@ -70,35 +74,25 @@ namespace WindowsFormsArrays
         {
             if (i > 1)
             {
-                if (l == 0) { l = 6; s -= 60; }
+                left = i / 6;
+                top = i % 6;
                 i--;
-                panel1.Controls.RemoveAt(i - 1);
-                l--;
-                if (l == -1) { l = 6; s -= 60; }
-                btn.Location = new Point(s, l * 25);
+                panel1.Controls.RemoveAt(i);
+                left = i / 6;
+                top = i % 6;
+                btn.Location = new Point(left * 60, top * 25);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            panel1.Controls.RemoveAt(i-1);
-            tb = new TextBox();
-            if (l == 6) { l = 0; s += 60; }
-            tb.Location = new Point(s, l * 25);
-            tb.Size = new Size(50, 20);
-            //tb.Text = "val" + i;
-            tb.Name = "val" + i;
-            panel1.Controls.Add(tb);
-            i++;
-            l++;
+            panel1.Controls.RemoveAt(i);
 
-            if (l == 6) { l = 0; s += 60; }
-            btn.Location = new Point(s, l * 25);
-            btn.Size = new Size(50, 20);
-            btn.Text = "Somme";
-            btn.Name = "btn" + i;
-            btn.Click += new System.EventHandler(btnSomme_Click);
-            panel1.Controls.Add(btn);
+            addBox(i);
+
+            i++;
+
+            addButton(i);
         }
 
         private void numBoxes_KeyPress(object sender, KeyPressEventArgs e)
