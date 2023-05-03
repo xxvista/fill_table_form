@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,17 +21,16 @@ namespace WindowsFormsArrays
         int left = 0;
         int sum = 0;
         int i;
-
+        double[] tab = new double[100];
         public void addBox(int i) {
             tb = new TextBox();
             left = i / 6;
             top = i % 6;
             tb.Location = new Point(left * 60, top * 25);
             tb.Size = new Size(50, 20);
-            //tb.Text = "val" + i;
+            tb.Text = "0";
             tb.Name = "val" + i;
             panel1.Controls.Add(tb);
-            label2.Text = left.ToString();
         }
         public void addButton(int i) { 
             left = i / 6;
@@ -50,8 +49,9 @@ namespace WindowsFormsArrays
 
         private void button1_Click(object sender, EventArgs e)
         {
-    
-                for (i = 0; i < Convert.ToInt32(numBoxes.Text); i++)
+            panel1.Controls.Clear();
+
+            for (i = 0; i < Convert.ToInt32(numBoxes.Text); i++)
                 {
                     addBox(i);
                 }
@@ -61,13 +61,29 @@ namespace WindowsFormsArrays
 
         private void btnSomme_Click(object sender, EventArgs e)
         {
-            
-            for (int j = 1; j < i; j++)
+            /*for (int j = 1; j < i; j++)
             {
                 var name = "val" + j;
                 sum += Convert.ToInt32(this.panel1.Controls[name].Text);
             }
+            label2.Text = sum.ToString();*/
+            double sum = 0;
+            int i = 0;
+            foreach (Control c in panel1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    tab[i] = Convert.ToDouble(c.Text);
+                    i++;
+                }
+            }
+            foreach (double val in tab)
+            {
+                sum += val;
+                tab[i] = 0;
+            }
             label2.Text = sum.ToString();
+            sum = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)

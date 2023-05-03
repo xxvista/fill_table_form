@@ -9,3 +9,4 @@ C:\Users\pc\source\repos\WindowsFormsArrays\WindowsFormsArrays\obj\Debug\Windows
 C:\Users\pc\source\repos\WindowsFormsArrays\WindowsFormsArrays\obj\Debug\WindowsFormsArrays.csproj.CoreCompileInputs.cache
 C:\Users\pc\source\repos\WindowsFormsArrays\WindowsFormsArrays\obj\Debug\WindowsFormsArrays.exe
 C:\Users\pc\source\repos\WindowsFormsArrays\WindowsFormsArrays\obj\Debug\WindowsFormsArrays.pdb
+C:\Users\pc\source\repos\WindowsFormsArrays\WindowsFormsArrays\obj\Debug\WindowsFormsArrays.Form2.resources
